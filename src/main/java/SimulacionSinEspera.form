@@ -85,6 +85,19 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="Atras" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="resultadoInventario" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="resultadoOrden" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="esteEsResultadoOrdenar" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="resultadoFaltante" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="resultadoTotal" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -121,7 +134,18 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="263" max="-2" attributes="0"/>
-              <EmptySpace pref="126" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="resultadoOrden" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="esteEsResultadoOrdenar" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="resultadoInventario" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="resultadoFaltante" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="resultadoTotal" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="34" max="32767" attributes="0"/>
               <Component id="Atras" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -262,5 +286,27 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="resultadoOrden">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Costo de Ordenar:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="resultadoInventario">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Costo de llevar Inventario:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="resultadoFaltante">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Costo de Faltante:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="resultadoTotal">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Costo Total:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="esteEsResultadoOrdenar">
+    </Component>
   </SubComponents>
 </Form>
