@@ -35,6 +35,9 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
        double ordenarResultado = 0;
         double faltoResultado = 0;
         double InventarioResultado = 0;
+      double  optimizacionValorMinimo = 0 ; 
+      double optimizacionOrden = 0 ; 
+       double optimizacionReorden = 0 ; 
     public static ArrayList<ObjetoReporteSinEspera> lista = new ArrayList<ObjetoReporteSinEspera>();
     
     
@@ -72,6 +75,10 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
         resultadoFaltante = new javax.swing.JLabel();
         resultadoTotal = new javax.swing.JLabel();
         esteEsResultadoOrdenar = new javax.swing.JLabel();
+        Optimizacion = new javax.swing.JButton();
+        ordenOptimotxt = new javax.swing.JLabel();
+        reordenOptimotxt = new javax.swing.JLabel();
+        costoOptimotxt = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -132,6 +139,19 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
 
         resultadoTotal.setText("Costo Total:");
 
+        Optimizacion.setText("Optimizacion");
+        Optimizacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OptimizacionActionPerformed(evt);
+            }
+        });
+
+        ordenOptimotxt.setText("Orden Optimo");
+
+        reordenOptimotxt.setText("Reorden Optimo: ");
+
+        costoOptimotxt.setText("Costo Optimo: ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -187,14 +207,24 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(resultadoInventario)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(resultadoOrden)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(esteEsResultadoOrdenar))
-                            .addComponent(resultadoFaltante)
-                            .addComponent(resultadoTotal))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(esteEsResultadoOrdenar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Optimizacion))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(resultadoInventario)
+                                    .addComponent(resultadoFaltante)
+                                    .addComponent(resultadoTotal))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(reordenOptimotxt)
+                                    .addComponent(ordenOptimotxt)
+                                    .addComponent(costoOptimotxt))
+                                .addGap(152, 152, 152)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,14 +257,24 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(resultadoOrden)
-                    .addComponent(esteEsResultadoOrdenar))
+                    .addComponent(esteEsResultadoOrdenar)
+                    .addComponent(Optimizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(resultadoInventario)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(resultadoFaltante))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(ordenOptimotxt)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(resultadoInventario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(resultadoFaltante)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(resultadoTotal)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(resultadoTotal)
+                    .addComponent(reordenOptimotxt))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(costoOptimotxt)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Atras)
                 .addContainerGap())
         );
@@ -259,7 +299,7 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
        //resultadoOrden.setText("Costo de Ordenar fdsafdsa:" );
        //simulacion.esteEsResultadoOrdenar.setText("Costo de Ordenar fdsafdsa:" );
        SimulacionSinEspera simulacion = new SimulacionSinEspera(); 
-      simulacion.costoTotal(orden, reorden, meses, unidadesIniciales, costoFaltante, costoOrden, costoInventario, simulacion) ;
+      simulacion.costoTotal(orden, reorden, meses, unidadesIniciales, costoFaltante, costoOrden, costoInventario) ;
        mostrar();
        resultadoOrden.setText("Costo de Ordenar: " + simulacion.ordenarResultado);
        resultadoInventario.setText("Costo de llevar Inventario: " + simulacion.InventarioResultado);
@@ -293,7 +333,7 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
 ));
     
     }
-    public void costoTotal (int q, int R ,int N , int unidadesIniciales , int costoFaltante , int costoOrden , int CostoInventario,SimulacionSinEspera simulaciond){
+    public void costoTotal (int q, int R ,int N , int unidadesIniciales , int costoFaltante , int costoOrden , int CostoInventario){
         //SimulacionSinEspera simulacion = new SimulacionSinEspera();
          //ArrayList<ObjetoReporteSinEspera> lista = new ArrayList<ObjetoReporteSinEspera>();
          Demanda demanda = new Demanda();
@@ -318,7 +358,7 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
         
         double pedido = 0 ; //cantidad de pedidos
         double faltante = 0 ; //cantidad de faltantes
-        
+        double banderaFaltante = 0 ; //variable para la grafica
         int orden = 0 ;
         
         for (int mes = 0; mes < N; mes++) {
@@ -342,7 +382,7 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
                 //cuando el inventario final se queda vacio
                 if (inventarioFinal[mes] < 0){
                     faltante = faltante + inventarioFinal[mes] ;
-                    
+                    banderaFaltante = aux - inventarioInicial[mes] ;
                     inventarioInicial[mes+1] = inventarioFinal[mes] ;
                     promedio[mes] = inventarioInicial[mes]/2*inventarioInicial[mes]/aux;
                     inventarioFinal[mes] = 0 ;
@@ -358,13 +398,17 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
                     banderaUno = mes + tiempoDeEntrega.calcular() ;
                     pedido = pedido + 1 ;
                     banderaDos = 1 ;
-                     ObjetoReporteSinEspera reporte = new ObjetoReporteSinEspera(mes+1+"" , inventarioInicial[mes]+"" , aux+"" , inventarioFinal[mes]+"" ,faltante+"" , orden+"");
+                     ObjetoReporteSinEspera reporte = new ObjetoReporteSinEspera(mes+1+"" , inventarioInicial[mes]+"" , aux+"" , inventarioFinal[mes]+"" ,banderaFaltante+"" , orden+"");
 //                    System.out.println("Se realizo un reorden llegara en el Mes: " + banderaUno );
                     lista.add(reporte);
+                    banderaFaltante = 0; 
+                }else{
+                ObjetoReporteSinEspera reporte = new ObjetoReporteSinEspera(mes+1+"" , inventarioInicial[mes]+"" , aux+"" , inventarioFinal[mes]+"" ,banderaFaltante+"" , "");
+                lista.add(reporte);
+                banderaFaltante = 0 ; 
                 }
                 
-                ObjetoReporteSinEspera reporte = new ObjetoReporteSinEspera(mes+1+"" , inventarioInicial[mes]+"" , aux+"" , inventarioFinal[mes]+"" ,faltante+"" , "");
-                lista.add(reporte);
+                
                 
             }
         
@@ -392,6 +436,52 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
         new Inicio().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_AtrasActionPerformed
+
+    private void OptimizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OptimizacionActionPerformed
+        SimulacionSinEspera simu = new SimulacionSinEspera (); 
+        OptimizacionHooke optimizacion = new OptimizacionHooke();
+
+        int OrdenPivote = orden - 50;
+        int ReordenPivote = reorden + 50;
+
+        //  int OrdenOptimo = 0 ; 
+        //  int ReordenOptimo = 0 ;
+        int margen = 100;
+        double valorMinimo = 0;
+        double CostoTotal = optimizacion.Optimi(orden, reorden, meses, unidadesIniciales, costoFaltante, costoOrden, costoInventario);
+
+        double CostoTotalPivote = optimizacion.Optimi(OrdenPivote+ 1, ReordenPivote - 1, meses, unidadesIniciales, costoFaltante, costoOrden, costoInventario);
+
+        while (Math.abs(CostoTotal - CostoTotalPivote) > margen) {
+            if (CostoTotal > CostoTotalPivote) {
+                valorMinimo = CostoTotalPivote;
+            } else {
+                valorMinimo = CostoTotal;
+            }
+            OrdenPivote = OrdenPivote + 1;
+            ReordenPivote = ReordenPivote - 1;
+
+            CostoTotal = CostoTotalPivote;
+            //System.out.println("EL COSTO ES: " + CostoTotal + " CON ORDEN IGUAL A: " + OrdenPivote + " Y REORDEN IGUAL A: " + ReordenPivote);
+            //  System.out.println("EL COSTO TOTAL ES" + CostoTotal);
+            CostoTotalPivote = optimizacion.Optimi(orden, reorden, meses, unidadesIniciales, costoFaltante, costoOrden, costoInventario);
+            // System.out.println( "EL COSTO ES: " + CostoTotalPivote + " CON ORDEN IGUAL A: " + OrdenPivote + " Y REORDEN IGUAL A: " + ReordenPivote);
+            //  System.out.println("EL COSTO PIVOTE ES" + CostoTotalPivote);
+        }
+       // System.out.println("######################################");
+       optimizacionValorMinimo = valorMinimo ; 
+       optimizacionOrden = OrdenPivote ; 
+       optimizacionReorden = ReordenPivote ; 
+       System.out.println("EL COSTO MAS OPTIMO ES: " + valorMinimo + " CON ORDEN IGUAL A : " + OrdenPivote + " Y REORDEN IGUAL A : " + ReordenPivote);
+       
+       
+     ordenOptimotxt.setText("Orden Optimo: " +  optimizacionOrden);
+       reordenOptimotxt.setText("Reorden Optimo: " + optimizacionReorden);
+       costoOptimotxt.setText("Costo Optimo: " + optimizacionValorMinimo);
+
+        
+        
+    }//GEN-LAST:event_OptimizacionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -427,7 +517,81 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
             }
         });
     }
+     public double corrida(int q, int R, int N) {
+        Demanda demanda = new Demanda();
+        TiempoEntrega tiempoDeEntrega = new TiempoEntrega();
+        double inventarioInicial[];
+        inventarioInicial = new double[N + 1];
 
+        double inventarioFinal[];
+        inventarioFinal = new double[N];
+
+        double promedio[];
+        promedio = new double[N];
+
+        double inversionInicial = 150;
+
+        inventarioInicial[0] = inversionInicial;
+
+        double costoTotal = 0;
+        double banderaUno = 0; // mes en el cual llega el pedido 
+        double banderaDos = 0; //pedido en curso
+
+        double pedido = 0; //cantidad de pedidos
+        double faltante = 0; //cantidad de faltantes
+
+        for (int mes = 0; mes < N; mes++) {
+
+            if (mes == banderaUno && banderaDos == 1) {
+                inventarioInicial[mes] = inventarioInicial[mes] + q;
+
+                banderaDos = 0;
+            }
+
+            double aux = demanda.calcular(mes);
+
+            inventarioFinal[mes] = inventarioInicial[mes] - aux;
+            inventarioInicial[mes + 1] = inventarioFinal[mes];
+
+            if (inventarioFinal[mes] < 0) {
+                faltante = faltante + inventarioFinal[mes];
+
+                inventarioInicial[mes + 1] = inventarioFinal[mes];
+                promedio[mes] = inventarioInicial[mes] / 2 * inventarioInicial[mes] / aux;
+                inventarioFinal[mes] = 0;
+
+            } else {
+                promedio[mes] = (inventarioInicial[mes] + inventarioFinal[mes]) / 2;
+
+            }
+
+            if (inventarioInicial[mes] < R && banderaDos == 0) {
+
+                banderaUno = mes + tiempoDeEntrega.calcular();
+                pedido = pedido + 1;
+                banderaDos = 1;
+
+            }
+
+        }
+
+        int total = 0;
+        //total pedidos
+        for (int contador = 0; contador < promedio.length; contador++) {
+            total += promedio[contador];
+
+        }
+        double ordenar = 100 * pedido;
+        //costos
+        // System.out.println("El COSTO DE ORDENARMIENTO ES DE: " + ordenar + "Bs");
+        double inventario = total * 20 / N;
+        // System.out.println("El COSTO DEL INVENTARIO ES DE: " + inventario + "Bs");
+        double falto = 50 * faltante * (-1);
+        // System.out.println("El COSTO DEL FALTANTE ES DE: " + falto + "Bs");
+        costoTotal = ordenar + inventario + falto;
+        return costoTotal;
+
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Atras;
     private javax.swing.JTextField CostoFaltantetxt;
@@ -435,10 +599,12 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
     private javax.swing.JTextField CostoOrdentxt;
     private javax.swing.JButton IniciarSimulacion;
     private javax.swing.JTextField Mesestxt;
+    private javax.swing.JButton Optimizacion;
     private javax.swing.JTextField Ordentxt;
     private javax.swing.JTextField Reordentxt;
     private javax.swing.JTable Tabla;
     private javax.swing.JTextField UnidadesInicialestxt;
+    private javax.swing.JLabel costoOptimotxt;
     private javax.swing.JLabel esteEsResultadoOrdenar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -449,6 +615,8 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel ordenOptimotxt;
+    private javax.swing.JLabel reordenOptimotxt;
     private javax.swing.JLabel resultadoFaltante;
     private javax.swing.JLabel resultadoInventario;
     private javax.swing.JLabel resultadoOrden;
