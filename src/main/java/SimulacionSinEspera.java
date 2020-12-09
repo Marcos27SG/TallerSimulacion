@@ -27,7 +27,14 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
      public static int reorden ; 
        public static int meses ; 
        public static ArrayList res ; 
-     
+       public static double resultadoOrdenInt ; 
+       public static double restultadoInventarioInt ; 
+       public static double resultadoFaltanteInt ; 
+       public static double restultadoTotalInt ; 
+      double costoTotal = 0;
+       double ordenarResultado = 0;
+        double faltoResultado = 0;
+        double InventarioResultado = 0;
     public static ArrayList<ObjetoReporteSinEspera> lista = new ArrayList<ObjetoReporteSinEspera>();
     
     
@@ -60,6 +67,11 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
         Atras = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla = new javax.swing.JTable();
+        resultadoOrden = new javax.swing.JLabel();
+        resultadoInventario = new javax.swing.JLabel();
+        resultadoFaltante = new javax.swing.JLabel();
+        resultadoTotal = new javax.swing.JLabel();
+        esteEsResultadoOrdenar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -112,6 +124,14 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(Tabla);
 
+        resultadoOrden.setText("Costo de Ordenar:");
+
+        resultadoInventario.setText("Costo de llevar Inventario:");
+
+        resultadoFaltante.setText("Costo de Faltante:");
+
+        resultadoTotal.setText("Costo Total:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -163,7 +183,17 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
                                     .addComponent(Mesestxt, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(Atras)))
+                        .addComponent(Atras))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(resultadoInventario)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(resultadoOrden)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(esteEsResultadoOrdenar))
+                            .addComponent(resultadoFaltante)
+                            .addComponent(resultadoTotal))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -194,7 +224,17 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
                     .addComponent(Reordentxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(resultadoOrden)
+                    .addComponent(esteEsResultadoOrdenar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(resultadoInventario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(resultadoFaltante)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(resultadoTotal)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(Atras)
                 .addContainerGap())
         );
@@ -215,17 +255,21 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
          orden = Integer.parseInt(Ordentxt.getText());
          reorden = Integer.parseInt(Reordentxt.getText());
          meses = Integer.parseInt(Mesestxt.getText());
-         
        
+       //resultadoOrden.setText("Costo de Ordenar fdsafdsa:" );
+       //simulacion.esteEsResultadoOrdenar.setText("Costo de Ordenar fdsafdsa:" );
        SimulacionSinEspera simulacion = new SimulacionSinEspera(); 
-      simulacion.costoTotal(orden, reorden, meses, unidadesIniciales, costoFaltante, costoOrden, costoInventario) ;
+      simulacion.costoTotal(orden, reorden, meses, unidadesIniciales, costoFaltante, costoOrden, costoInventario, simulacion) ;
        mostrar();
-        
+       resultadoOrden.setText("Costo de Ordenar: " + simulacion.ordenarResultado);
+       resultadoInventario.setText("Costo de llevar Inventario: " + simulacion.InventarioResultado);
+       resultadoFaltante.setText("Costo de Faltante: " + simulacion.faltoResultado);
+       resultadoTotal.setText("Costo Total: " + simulacion.costoTotal);
         //new ReporteSinEspera().setVisible(true);
        // this.setVisible(false);
         
     }//GEN-LAST:event_IniciarSimulacionActionPerformed
-    
+   
     public void mostrar(){
         System.out.print(lista.size());
         String matris [][] = new String[lista.size()][6];
@@ -249,8 +293,8 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
 ));
     
     }
-    public void costoTotal (int q, int R ,int N , int unidadesIniciales , int costoFaltante , int costoOrden , int CostoInventario){
-    
+    public void costoTotal (int q, int R ,int N , int unidadesIniciales , int costoFaltante , int costoOrden , int CostoInventario,SimulacionSinEspera simulaciond){
+        //SimulacionSinEspera simulacion = new SimulacionSinEspera();
          //ArrayList<ObjetoReporteSinEspera> lista = new ArrayList<ObjetoReporteSinEspera>();
          Demanda demanda = new Demanda();
          TiempoEntrega tiempoDeEntrega = new TiempoEntrega();
@@ -268,7 +312,7 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
         inventarioInicial[0] = inversionInicial ;
         
         
-        double costoTotal = 0;
+        //double costoTotal = 0;
         double banderaUno = 0 ; // mes en el cual llega el pedido 
         double banderaDos = 0; //pedido en curso
         
@@ -330,15 +374,16 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
             total += promedio[contador];
             
         }
-        double ordenar = costoOrden*pedido ;
+         ordenarResultado = costoOrden*pedido ;
         //costos
- //       System.out.println("El COSTO DE ORDENARMIENTO ES DE: " + ordenar + "Bs");
-        double inventario = total*costoInventario/N;
- //       System.out.println("El COSTO DEL INVENTARIO ES DE: " + inventario + "Bs");
+       // System.out.println("El COSTO DE ORDENARMIENTO ES DE: " + ordenar + "Bs");
+         InventarioResultado = total*costoInventario/N;
+       // System.out.println("El COSTO DEL INVENTARIO ES DE: " + inventario + "Bs");
         //double falto = costoFaltante*faltante *(-1);
-        double falto = costoFaltante*faltante ;
- //       System.out.println("El COSTO DEL FALTANTE ES DE: " + falto + "Bs");
-        costoTotal = ordenar + inventario + falto;
+         faltoResultado = costoFaltante*faltante *(-1);
+       // System.out.println("El COSTO DEL FALTANTE ES DE: " + falto + "Bs");
+        costoTotal = ordenarResultado + InventarioResultado + faltoResultado;
+        
         //return lista ;
                 
         
@@ -394,6 +439,7 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
     private javax.swing.JTextField Reordentxt;
     private javax.swing.JTable Tabla;
     private javax.swing.JTextField UnidadesInicialestxt;
+    private javax.swing.JLabel esteEsResultadoOrdenar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -403,5 +449,9 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel resultadoFaltante;
+    private javax.swing.JLabel resultadoInventario;
+    private javax.swing.JLabel resultadoOrden;
+    private javax.swing.JLabel resultadoTotal;
     // End of variables declaration//GEN-END:variables
 }
