@@ -87,7 +87,7 @@ public class OptimizacionHooke {
             if (inventarioFinal[mes] < 0) {
                 faltante = faltante + inventarioFinal[mes];
 
-                inventarioInicial[mes + 1] = inventarioFinal[mes];
+                inventarioInicial[mes + 1] = 0;
                 promedio[mes] = inventarioInicial[mes] / 2 * inventarioInicial[mes] / aux;
                 inventarioFinal[mes] = 0;
 
@@ -120,6 +120,95 @@ public class OptimizacionHooke {
         double falto = costoFaltante * faltante * (-1);
         // System.out.println("El COSTO DEL FALTANTE ES DE: " + falto + "Bs");
         costoTotal = ordenar + inventario + falto;
+        return costoTotal;
+
+    }
+       
+       public double OptimiConEspera(int q, int R, int N , int unidadesIniciales , int costoFaltanteConEspera , int costoFaltanteSinEspera , int costoOrden , int CostoInventario) {
+        Demanda demanda = new Demanda();
+        TiempoEntrega tiempoDeEntrega = new TiempoEntrega();
+        double inventarioInicial[];
+        inventarioInicial = new double[N + 1];
+
+        double inventarioFinal[];
+        inventarioFinal = new double[N];
+
+        double promedio[];
+        promedio = new double[N];
+
+        double inversionInicial = unidadesIniciales;
+
+        inventarioInicial[0] = inversionInicial;
+
+        double costoTotal = 0;
+        double banderaUno = 0; // mes en el cual llega el pedido 
+        double banderaDos = 0; //pedido en curso
+
+        double pedido = 0; //cantidad de pedidos
+        double faltanteConEspera = 0; //cantidad de faltantes con espera
+        double faltanteSinEspera = 0; //cantidad de faltantes sin espera
+        TiempoEspera  tiempoDeEspera = new TiempoEspera();
+        for (int mes = 0; mes < N; mes++) {
+
+            if (mes == banderaUno && banderaDos == 1) {
+                inventarioInicial[mes] = inventarioInicial[mes] + q;
+
+                banderaDos = 0;
+            }
+
+            double aux = demanda.calcular(mes);
+
+            inventarioFinal[mes] = inventarioInicial[mes] - aux;
+            inventarioInicial[mes + 1] = inventarioFinal[mes];
+
+            if (inventarioFinal[mes] < 0) {
+                if (tiempoDeEspera.clienteEspera() == 1 ){
+                faltanteConEspera = faltanteConEspera + inventarioFinal[mes];
+
+                inventarioInicial[mes + 1] = inventarioFinal[mes] ;
+                promedio[mes] = inventarioInicial[mes] / 2 * inventarioInicial[mes] / aux;
+                inventarioFinal[mes] = 0;
+                
+                }else{
+                 faltanteSinEspera = faltanteSinEspera + inventarioFinal[mes];
+
+                inventarioInicial[mes + 1] = 0 ;
+                promedio[mes] = inventarioInicial[mes] / 2 * inventarioInicial[mes] / aux;
+                inventarioFinal[mes] = 0;
+                    
+                }
+                
+
+            } else {
+                promedio[mes] = (inventarioInicial[mes] + inventarioFinal[mes]) / 2;
+
+            }
+
+            if (inventarioInicial[mes] < R && banderaDos == 0) {
+
+                banderaUno = mes + tiempoDeEntrega.calcular();
+                pedido = pedido + 1;
+                banderaDos = 1;
+
+            }
+
+        }
+
+        int total = 0;
+        //total pedidos
+        for (int contador = 0; contador < promedio.length; contador++) {
+            total += promedio[contador];
+
+        }
+        double ordenar = costoOrden * pedido;
+        //costos
+        // System.out.println("El COSTO DE ORDENARMIENTO ES DE: " + ordenar + "Bs");
+        double inventario = total * CostoInventario / N;
+        // System.out.println("El COSTO DEL INVENTARIO ES DE: " + inventario + "Bs");
+        double faltoConEspera = costoFaltanteConEspera * faltanteConEspera * (-1);
+        double faltoSinEspera = costoFaltanteSinEspera * faltanteSinEspera * (-1);
+        // System.out.println("El COSTO DEL FALTANTE ES DE: " + falto + "Bs");
+        costoTotal = ordenar + inventario + faltoConEspera + faltoSinEspera;
         return costoTotal;
 
     }
