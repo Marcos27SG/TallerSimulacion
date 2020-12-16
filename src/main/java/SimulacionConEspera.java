@@ -1,3 +1,6 @@
+
+import java.util.ArrayList;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -18,6 +21,27 @@ public class SimulacionConEspera extends javax.swing.JFrame {
           this.setLocationRelativeTo(null);
           
     }
+      public static int costoInventario ; 
+    public static int costoOrden ; 
+    public static int costoFaltanteConEspera ; 
+    public static int costoFaltanteSinEspera ; 
+    public static int unidadesIniciales ; 
+    public static int orden ; 
+     public static int reorden ; 
+       public static int meses ; 
+       public static ArrayList res ; 
+       public static double resultadoOrdenInt ; 
+       public static double restultadoInventarioInt ; 
+       public static double resultadoFaltanteInt ; 
+       public static double restultadoTotalInt ; 
+      double costoTotal = 0;
+       double ordenarResultado = 0;
+        double faltoResultado = 0;
+        double InventarioResultado = 0;
+      double  optimizacionValorMinimo = 0 ; 
+      double optimizacionOrden = 0 ; 
+       double optimizacionReorden = 0 ; 
+    public static ArrayList<ModeloReporteConEspera> lista = new ArrayList<ModeloReporteConEspera>();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,8 +67,8 @@ public class SimulacionConEspera extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         Ordentxt = new javax.swing.JTextField();
         Reordentxt = new javax.swing.JTextField();
-        TiempoSimulaciontxt = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        tiempoSimulaciontxt = new javax.swing.JTextField();
+        iniciarSimulacion = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         CostoFaltanteSinEsperatxt = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -54,9 +78,9 @@ public class SimulacionConEspera extends javax.swing.JFrame {
         resultadoInventario = new javax.swing.JLabel();
         resultadoFaltanteConEspera = new javax.swing.JLabel();
         resultadoCostoTotal = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
+        ordenOptimo = new javax.swing.JLabel();
+        reordenOptimo = new javax.swing.JLabel();
+        costoOptimo = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         resultadoFaltanteSinEspera = new javax.swing.JLabel();
 
@@ -96,13 +120,18 @@ public class SimulacionConEspera extends javax.swing.JFrame {
             }
         });
 
-        TiempoSimulaciontxt.addActionListener(new java.awt.event.ActionListener() {
+        tiempoSimulaciontxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TiempoSimulaciontxtActionPerformed(evt);
+                tiempoSimulaciontxtActionPerformed(evt);
             }
         });
 
-        jButton1.setText("INICIAR SIMULACION");
+        iniciarSimulacion.setText("INICIAR SIMULACION");
+        iniciarSimulacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                iniciarSimulacionActionPerformed(evt);
+            }
+        });
 
         jLabel10.setText("Costo de Faltante sin Espera");
 
@@ -140,11 +169,11 @@ public class SimulacionConEspera extends javax.swing.JFrame {
 
         resultadoCostoTotal.setText("Costo total: ");
 
-        jLabel15.setText("Orden Optimo:");
+        ordenOptimo.setText("Orden Optimo:");
 
-        jLabel16.setText("Reorden Optimo:");
+        reordenOptimo.setText("Reorden Optimo:");
 
-        jLabel17.setText("Costo Optimo:");
+        costoOptimo.setText("Costo Optimo:");
 
         jButton3.setText("Optimizacion");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -172,15 +201,15 @@ public class SimulacionConEspera extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel15)
+                        .addComponent(ordenOptimo)
                         .addGap(199, 199, 199))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton3)
                         .addGap(83, 83, 83))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel16)
-                            .addComponent(jLabel17))
+                            .addComponent(reordenOptimo)
+                            .addComponent(costoOptimo))
                         .addContainerGap())))
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
@@ -222,7 +251,7 @@ public class SimulacionConEspera extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(50, 50, 50)
-                                        .addComponent(jButton1)
+                                        .addComponent(iniciarSimulacion)
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(36, 36, 36)
@@ -232,7 +261,7 @@ public class SimulacionConEspera extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(UnidadesInicialestxt, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
-                                            .addComponent(TiempoSimulaciontxt))
+                                            .addComponent(tiempoSimulaciontxt))
                                         .addGap(71, 71, 71))))))))
         );
         layout.setVerticalGroup(
@@ -250,7 +279,7 @@ public class SimulacionConEspera extends javax.swing.JFrame {
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(CostoFaltanteSinEsperatxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9)
-                            .addComponent(TiempoSimulaciontxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tiempoSimulaciontxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(7, 7, 7))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
@@ -276,7 +305,7 @@ public class SimulacionConEspera extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
                             .addComponent(Reordentxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1))))
+                            .addComponent(iniciarSimulacion))))
                 .addGap(39, 39, 39)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
@@ -286,16 +315,16 @@ public class SimulacionConEspera extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(resultadoInventario)
-                    .addComponent(jLabel15))
+                    .addComponent(ordenOptimo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(resultadoFaltanteConEspera)
-                    .addComponent(jLabel16))
+                    .addComponent(reordenOptimo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(resultadoFaltanteSinEspera)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
+                    .addComponent(costoOptimo)
                     .addComponent(resultadoCostoTotal))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(jButton2)
@@ -317,9 +346,9 @@ public class SimulacionConEspera extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_OrdentxtActionPerformed
 
-    private void TiempoSimulaciontxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TiempoSimulaciontxtActionPerformed
+    private void tiempoSimulaciontxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tiempoSimulaciontxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TiempoSimulaciontxtActionPerformed
+    }//GEN-LAST:event_tiempoSimulaciontxtActionPerformed
 
     private void CostoFaltanteSinEsperatxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CostoFaltanteSinEsperatxtActionPerformed
         // TODO add your handling code here:
@@ -335,6 +364,54 @@ public class SimulacionConEspera extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void iniciarSimulacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarSimulacionActionPerformed
+        // TODO add your handling code here:
+        
+           lista.clear();
+         costoInventario = Integer.parseInt(CostoInventariotxt.getText());
+         costoOrden = Integer.parseInt(CostoOrdentxt.getText());
+         costoFaltanteConEspera = Integer.parseInt(CostoFaltanteConEsperatxt.getText());
+         costoFaltanteSinEspera = Integer.parseInt(CostoFaltanteSinEsperatxt.getText());
+         unidadesIniciales = Integer.parseInt(UnidadesInicialestxt.getText());
+         orden = Integer.parseInt(Ordentxt.getText());
+         reorden = Integer.parseInt(Reordentxt.getText());
+         meses = Integer.parseInt(tiempoSimulaciontxt.getText());
+       
+       //resultadoOrden.setText("Costo de Ordenar fdsafdsa:" );
+       //simulacion.esteEsResultadoOrdenar.setText("Costo de Ordenar fdsafdsa:" );
+       SimulacionConEspera simulacion = new SimulacionConEspera(); 
+      simulacion.costoTotal(orden, reorden, meses, unidadesIniciales, costoFaltanteConEspera , costoFaltanteSinEspera, costoOrden, costoInventario) ;
+       mostrar();
+       resultadoOrden.setText("Costo de Ordenar: " + simulacion.ordenarResultado);
+       resultadoInventario.setText("Costo de llevar Inventario: " + simulacion.InventarioResultado);
+       resultadoFaltanteConEspera.setText("Costo de Faltante: " + simulacion.faltoResultado);
+       resultadoCostoTotal.setText("Costo Total: " + simulacion.costoTotal);
+    }//GEN-LAST:event_iniciarSimulacionActionPerformed
+    
+    public void mostrar(){
+        System.out.print(lista.size());
+        String matris [][] = new String[lista.size()][7];
+        
+        for (int i = 0 ; i < lista.size() ; i++){
+            matris[i][0] = lista.get(i).getMes();
+            matris[i][1] = lista.get(i).getInventarioInicial();
+            matris[i][2] = lista.get(i).getDemanda();
+            matris[i][3] = lista.get(i).getInventarioFinal();
+            matris[i][4] = lista.get(i).getFaltante();
+            matris[i][5] = lista.get(i).getEspera();
+            matris[i][6] = lista.get(i).getOrden();
+            
+            
+            
+        }
+        Tabla.setModel(new javax.swing.table.DefaultTableModel(
+    matris,
+    new String [] {
+        "Mes", "I. Inicial", "Demanda", "I. Final", "Faltante", "Espera",  "Orden"
+    }
+));
+    
+    }
     /**
      * @param args the command line arguments
      */
@@ -369,7 +446,107 @@ public class SimulacionConEspera extends javax.swing.JFrame {
             }
         });
     }
-
+      public void costoTotal (int q, int R ,int N , int unidadesIniciales , int costoFaltanteConEspera , int costoFaltanteSinEspera , int costoOrden , int CostoInventario){
+        //SimulacionSinEspera simulacion = new SimulacionSinEspera();
+         //ArrayList<ObjetoReporteSinEspera> lista = new ArrayList<ObjetoReporteSinEspera>();
+         Demanda demanda = new Demanda();
+         TiempoEntrega tiempoDeEntrega = new TiempoEntrega();
+        double inventarioInicial[];
+        inventarioInicial = new double[N+1];
+        
+        double inventarioFinal[];
+        inventarioFinal = new double[N];
+        
+        double promedio[];
+        promedio = new double[N];
+         
+        double inversionInicial = unidadesIniciales ;
+        
+        inventarioInicial[0] = inversionInicial ;
+        
+        
+        //double costoTotal = 0;
+        double banderaUno = 0 ; // mes en el cual llega el pedido 
+        double banderaDos = 0; //pedido en curso
+        
+        double pedido = 0 ; //cantidad de pedidos
+        double faltante = 0 ; //cantidad de faltantes
+        double banderaFaltante = 0 ; //variable para la grafica
+        int orden = 0 ;
+        
+        for (int mes = 0; mes < N; mes++) {
+ //            System.out.println("######################################");
+ //           System.out.println("Mes:" + mes);
+ //           System.out.println("Unidades en el inventario inicial:" + inventarioInicial[mes] );
+            //paso en el que se aumenta el pedido al mes
+           if(mes == banderaUno && banderaDos == 1 ){
+               inventarioInicial [mes] = inventarioInicial[mes] + q ;
+   //            System.out.println("Este Mes llegaron: " + q + " unidades");
+  //             System.out.println("Unidades en el inventario depues de la llegada de unidades:" + inventarioInicial[mes] );
+               banderaDos = 0 ;
+           }
+            //demanda del mes
+                double aux = demanda.calcular(mes);
+ //                System.out.println("La demanda del Mes es de:" + aux);
+                inventarioFinal[mes] = inventarioInicial[mes] - aux; 
+                inventarioInicial[mes+1] = inventarioFinal[mes] ;
+                
+                
+                //cuando el inventario final se queda vacio
+                if (inventarioFinal[mes] < 0){
+                    faltante = faltante + inventarioFinal[mes] ;
+                    banderaFaltante = aux - inventarioInicial[mes] ;
+                   // inventarioInicial[mes+1] = inventarioFinal[mes] ;
+                   //Que el inventario inicial salga de 0 si es que se consume todas las unidades 
+                   inventarioInicial[mes+1] = 0 ;
+                    promedio[mes] = inventarioInicial[mes]/2*inventarioInicial[mes]/aux;
+                    inventarioFinal[mes] = 0 ;
+ //                   System.out.println("Unidades en el inventario final: " + inventarioFinal[mes] );
+                }else{
+                    promedio[mes] = (inventarioInicial[mes] + inventarioFinal[mes])/2;
+ //                   System.out.println("Unidades en el inventario final: " + inventarioFinal[mes] );
+                   
+                }
+                //hacer pedido
+                if(inventarioInicial[mes] < R && banderaDos == 0){
+                    orden = orden + 1 ; 
+                    banderaUno = mes + tiempoDeEntrega.calcular() ;
+                    pedido = pedido + 1 ;
+                    banderaDos = 1 ;
+                     ModeloReporteConEspera reporte = new ModeloReporteConEspera(mes+1+"" , inventarioInicial[mes]+"" , aux+"" , inventarioFinal[mes]+"" ,banderaFaltante+"" , banderaFaltante+"" , orden+"");
+//                    System.out.println("Se realizo un reorden llegara en el Mes: " + banderaUno );
+                    lista.add(reporte);
+                    banderaFaltante = 0; 
+                }else{
+                ModeloReporteConEspera reporte = new ModeloReporteConEspera(mes+1+"" , inventarioInicial[mes]+"" , aux+"" , inventarioFinal[mes]+"" ,banderaFaltante+"" ,banderaFaltante+"" , "");
+                lista.add(reporte);
+                banderaFaltante = 0 ; 
+                }
+                
+                
+                
+            }
+        
+        int total = 0;
+        //total pedidos
+        for (int contador = 0; contador < promedio.length; contador++) {
+            total += promedio[contador];
+            
+        }
+         ordenarResultado = costoOrden*pedido ;
+        //costos
+       // System.out.println("El COSTO DE ORDENARMIENTO ES DE: " + ordenar + "Bs");
+         InventarioResultado = total*costoInventario/N;
+       // System.out.println("El COSTO DEL INVENTARIO ES DE: " + inventario + "Bs");
+        //double falto = costoFaltante*faltante *(-1);
+         faltoResultado = costoFaltanteConEspera*faltante *(-1);
+       // System.out.println("El COSTO DEL FALTANTE ES DE: " + falto + "Bs");
+        costoTotal = ordenarResultado + InventarioResultado + faltoResultado;
+        
+        //return lista ;
+                
+        
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CostoFaltanteConEsperatxt;
     private javax.swing.JTextField CostoFaltanteSinEsperatxt;
@@ -378,16 +555,13 @@ public class SimulacionConEspera extends javax.swing.JFrame {
     private javax.swing.JTextField Ordentxt;
     private javax.swing.JTextField Reordentxt;
     private javax.swing.JTable Tabla;
-    private javax.swing.JTextField TiempoSimulaciontxt;
     private javax.swing.JTextField UnidadesInicialestxt;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel costoOptimo;
+    private javax.swing.JButton iniciarSimulacion;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -397,10 +571,13 @@ public class SimulacionConEspera extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel ordenOptimo;
+    private javax.swing.JLabel reordenOptimo;
     private javax.swing.JLabel resultadoCostoTotal;
     private javax.swing.JLabel resultadoFaltanteConEspera;
     private javax.swing.JLabel resultadoFaltanteSinEspera;
     private javax.swing.JLabel resultadoInventario;
     private javax.swing.JLabel resultadoOrden;
+    private javax.swing.JTextField tiempoSimulaciontxt;
     // End of variables declaration//GEN-END:variables
 }
