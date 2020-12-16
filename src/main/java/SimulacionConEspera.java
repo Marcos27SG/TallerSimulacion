@@ -16,6 +16,7 @@ public class SimulacionConEspera extends javax.swing.JFrame {
     public SimulacionConEspera() {
         initComponents();
           this.setLocationRelativeTo(null);
+          
     }
 
     /**
@@ -28,10 +29,10 @@ public class SimulacionConEspera extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        CostoInventario = new javax.swing.JTextField();
-        CostoOrden = new javax.swing.JTextField();
-        CostoFaltante = new javax.swing.JTextField();
-        UnidadesIniciales = new javax.swing.JTextField();
+        CostoInventariotxt = new javax.swing.JTextField();
+        CostoOrdentxt = new javax.swing.JTextField();
+        CostoFaltanteConEsperatxt = new javax.swing.JTextField();
+        UnidadesInicialestxt = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -40,27 +41,36 @@ public class SimulacionConEspera extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        Orden = new javax.swing.JTextField();
-        Reorden = new javax.swing.JTextField();
-        TiempoSimulacion = new javax.swing.JTextField();
+        Ordentxt = new javax.swing.JTextField();
+        Reordentxt = new javax.swing.JTextField();
+        TiempoSimulaciontxt = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        CostoFaltanteSinEsperatxt = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        Tabla = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
+        resultadoOrden = new javax.swing.JLabel();
+        resultadoInventario = new javax.swing.JLabel();
+        resultadoFaltanteConEspera = new javax.swing.JLabel();
+        resultadoCostoTotal = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        resultadoFaltanteSinEspera = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        CostoInventario.addActionListener(new java.awt.event.ActionListener() {
+        CostoInventariotxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CostoInventarioActionPerformed(evt);
+                CostoInventariotxtActionPerformed(evt);
             }
         });
 
-        CostoOrden.addActionListener(new java.awt.event.ActionListener() {
+        CostoOrdentxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CostoOrdenActionPerformed(evt);
+                CostoOrdentxtActionPerformed(evt);
             }
         });
 
@@ -80,15 +90,15 @@ public class SimulacionConEspera extends javax.swing.JFrame {
 
         jLabel9.setText("Meses a Simular");
 
-        Orden.addActionListener(new java.awt.event.ActionListener() {
+        Ordentxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OrdenActionPerformed(evt);
+                OrdentxtActionPerformed(evt);
             }
         });
 
-        TiempoSimulacion.addActionListener(new java.awt.event.ActionListener() {
+        TiempoSimulaciontxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TiempoSimulacionActionPerformed(evt);
+                TiempoSimulaciontxtActionPerformed(evt);
             }
         });
 
@@ -96,24 +106,24 @@ public class SimulacionConEspera extends javax.swing.JFrame {
 
         jLabel10.setText("Costo de Faltante sin Espera");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        CostoFaltanteSinEsperatxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                CostoFaltanteSinEsperatxtActionPerformed(evt);
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        Tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Mes", "Inv Inicial", "Demanda", "Inv Final", "Faltante", "Espera", "Orden"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(Tabla);
 
         jButton2.setText("Atras");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -122,6 +132,29 @@ public class SimulacionConEspera extends javax.swing.JFrame {
             }
         });
 
+        resultadoOrden.setText("Costo de Ordenar:");
+
+        resultadoInventario.setText("Costo de llevar Inventario: ");
+
+        resultadoFaltanteConEspera.setText("Costo de Faltante con Espera: ");
+
+        resultadoCostoTotal.setText("Costo total: ");
+
+        jLabel15.setText("Orden Optimo:");
+
+        jLabel16.setText("Reorden Optimo:");
+
+        jLabel17.setText("Costo Optimo:");
+
+        jButton3.setText("Optimizacion");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        resultadoFaltanteSinEspera.setText("Costo de Faltante sin Espera:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -129,20 +162,42 @@ public class SimulacionConEspera extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jButton2)
+                        .addComponent(resultadoOrden, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(resultadoFaltanteConEspera, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(resultadoCostoTotal, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(resultadoInventario, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(resultadoFaltanteSinEspera))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel15)
+                        .addGap(199, 199, 199))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton3)
+                        .addGap(83, 83, 83))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 760, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel17))
+                        .addContainerGap())))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 857, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel3))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
                         .addGap(4, 4, 4)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(CostoOrden, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
-                            .addComponent(CostoInventario, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
-                            .addComponent(CostoFaltante))
+                            .addComponent(CostoOrdentxt, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+                            .addComponent(CostoInventariotxt, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+                            .addComponent(CostoFaltanteConEsperatxt))
                         .addGap(43, 43, 43)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -161,9 +216,9 @@ public class SimulacionConEspera extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(Orden, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-                                        .addComponent(jTextField1))
-                                    .addComponent(Reorden, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(Ordentxt, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                                        .addComponent(CostoFaltanteSinEsperatxt))
+                                    .addComponent(Reordentxt, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(50, 50, 50)
@@ -176,29 +231,30 @@ public class SimulacionConEspera extends javax.swing.JFrame {
                                             .addComponent(jLabel9))
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(TiempoSimulacion)
-                                            .addComponent(UnidadesIniciales))
-                                        .addGap(71, 71, 71))))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(709, 709, 709))))
+                                            .addComponent(UnidadesInicialestxt, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                                            .addComponent(TiempoSimulaciontxt))
+                                        .addGap(71, 71, 71))))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(CostoInventario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9)
-                    .addComponent(TiempoSimulacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)
+                        .addGap(22, 22, 22)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CostoInventariotxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CostoFaltanteSinEsperatxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9)
+                            .addComponent(TiempoSimulaciontxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(7, 7, 7))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
@@ -206,24 +262,42 @@ public class SimulacionConEspera extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CostoFaltante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(CostoFaltanteConEsperatxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(CostoOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(CostoOrdentxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel7))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(Orden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Ordentxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel6)
-                                .addComponent(UnidadesIniciales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(UnidadesInicialestxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
-                            .addComponent(Reorden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Reordentxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton1))))
-                .addGap(38, 38, 38)
+                .addGap(39, 39, 39)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
+                .addGap(36, 36, 36)
+                .addComponent(jButton3)
+                .addGap(1, 1, 1)
+                .addComponent(resultadoOrden)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(resultadoInventario)
+                    .addComponent(jLabel15))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(resultadoFaltanteConEspera)
+                    .addComponent(jLabel16))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(resultadoFaltanteSinEspera)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17)
+                    .addComponent(resultadoCostoTotal))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addContainerGap())
         );
@@ -231,31 +305,35 @@ public class SimulacionConEspera extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CostoInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CostoInventarioActionPerformed
+    private void CostoInventariotxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CostoInventariotxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_CostoInventarioActionPerformed
+    }//GEN-LAST:event_CostoInventariotxtActionPerformed
 
-    private void CostoOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CostoOrdenActionPerformed
+    private void CostoOrdentxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CostoOrdentxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_CostoOrdenActionPerformed
+    }//GEN-LAST:event_CostoOrdentxtActionPerformed
 
-    private void OrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrdenActionPerformed
+    private void OrdentxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrdentxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_OrdenActionPerformed
+    }//GEN-LAST:event_OrdentxtActionPerformed
 
-    private void TiempoSimulacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TiempoSimulacionActionPerformed
+    private void TiempoSimulaciontxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TiempoSimulaciontxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TiempoSimulacionActionPerformed
+    }//GEN-LAST:event_TiempoSimulaciontxtActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void CostoFaltanteSinEsperatxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CostoFaltanteSinEsperatxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_CostoFaltanteSinEsperatxtActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
          new Inicio().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -293,17 +371,23 @@ public class SimulacionConEspera extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField CostoFaltante;
-    private javax.swing.JTextField CostoInventario;
-    private javax.swing.JTextField CostoOrden;
-    private javax.swing.JTextField Orden;
-    private javax.swing.JTextField Reorden;
-    private javax.swing.JTextField TiempoSimulacion;
-    private javax.swing.JTextField UnidadesIniciales;
+    private javax.swing.JTextField CostoFaltanteConEsperatxt;
+    private javax.swing.JTextField CostoFaltanteSinEsperatxt;
+    private javax.swing.JTextField CostoInventariotxt;
+    private javax.swing.JTextField CostoOrdentxt;
+    private javax.swing.JTextField Ordentxt;
+    private javax.swing.JTextField Reordentxt;
+    private javax.swing.JTable Tabla;
+    private javax.swing.JTextField TiempoSimulaciontxt;
+    private javax.swing.JTextField UnidadesInicialestxt;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -313,7 +397,10 @@ public class SimulacionConEspera extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel resultadoCostoTotal;
+    private javax.swing.JLabel resultadoFaltanteConEspera;
+    private javax.swing.JLabel resultadoFaltanteSinEspera;
+    private javax.swing.JLabel resultadoInventario;
+    private javax.swing.JLabel resultadoOrden;
     // End of variables declaration//GEN-END:variables
 }
