@@ -38,7 +38,7 @@
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
+                      <Component id="ordenOptimo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="199" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
@@ -47,8 +47,8 @@
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel16" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
+                          <Component id="reordenOptimo" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="costoOptimo" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -103,7 +103,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="iniciarSimulacion" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
@@ -115,7 +115,7 @@
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="UnidadesInicialestxt" pref="46" max="32767" attributes="0"/>
-                                          <Component id="TiempoSimulaciontxt" max="32767" attributes="0"/>
+                                          <Component id="tiempoSimulaciontxt" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
                                   </Group>
@@ -142,7 +142,7 @@
                           <Component id="jLabel10" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                           <Component id="CostoFaltanteSinEsperatxt" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="TiempoSimulaciontxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tiempoSimulaciontxt" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                   </Group>
@@ -177,7 +177,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                           <Component id="Reordentxt" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                          <Component id="iniciarSimulacion" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -190,18 +190,18 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="resultadoInventario" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="ordenOptimo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="resultadoFaltanteConEspera" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="reordenOptimo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="resultadoFaltanteSinEspera" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="costoOptimo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="resultadoCostoTotal" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="23" max="32767" attributes="0"/>
@@ -275,15 +275,18 @@
     </Component>
     <Component class="javax.swing.JTextField" name="Reordentxt">
     </Component>
-    <Component class="javax.swing.JTextField" name="TiempoSimulaciontxt">
+    <Component class="javax.swing.JTextField" name="tiempoSimulaciontxt">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TiempoSimulaciontxtActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tiempoSimulaciontxtActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="iniciarSimulacion">
       <Properties>
         <Property name="text" type="java.lang.String" value="INICIAR SIMULACION"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="iniciarSimulacionActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel10">
       <Properties>
@@ -389,17 +392,17 @@
         <Property name="text" type="java.lang.String" value="Costo total: "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel15">
+    <Component class="javax.swing.JLabel" name="ordenOptimo">
       <Properties>
         <Property name="text" type="java.lang.String" value="Orden Optimo:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel16">
+    <Component class="javax.swing.JLabel" name="reordenOptimo">
       <Properties>
         <Property name="text" type="java.lang.String" value="Reorden Optimo:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel17">
+    <Component class="javax.swing.JLabel" name="costoOptimo">
       <Properties>
         <Property name="text" type="java.lang.String" value="Costo Optimo:"/>
       </Properties>
