@@ -185,8 +185,8 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
                         .addGap(75, 75, 75)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel7))
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))
                         .addGap(48, 48, 48)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Reordentxt, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -243,15 +243,15 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(CostoOrdentxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
                     .addComponent(Ordentxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(IniciarSimulacion))
+                    .addComponent(IniciarSimulacion)
+                    .addComponent(jLabel7))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(CostoFaltantetxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(Reordentxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Reordentxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -383,7 +383,9 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
                 if (inventarioFinal[mes] < 0){
                     faltante = faltante + inventarioFinal[mes] ;
                     banderaFaltante = aux - inventarioInicial[mes] ;
-                    inventarioInicial[mes+1] = inventarioFinal[mes] ;
+                   // inventarioInicial[mes+1] = inventarioFinal[mes] ;
+                   //Que el inventario inicial salga de 0 si es que se consume todas las unidades 
+                   inventarioInicial[mes+1] = 0 ;
                     promedio[mes] = inventarioInicial[mes]/2*inventarioInicial[mes]/aux;
                     inventarioFinal[mes] = 0 ;
  //                   System.out.println("Unidades en el inventario final: " + inventarioFinal[mes] );
