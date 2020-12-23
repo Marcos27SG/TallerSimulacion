@@ -26,31 +26,38 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                      <Component id="resultadoOrden" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="resultadoFaltanteConEspera" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="resultadoCostoTotal" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="resultadoInventario" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="resultadoFaltanteSinEspera" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="ordenOptimotxt" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="199" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="jButton3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="resultadoFaltanteSinEspera" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="reordenOptimotxt" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="costoOptimotxt" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="ordenOptimotxt" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="199" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="botonOptimizacion" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="reordenOptimotxt" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="costoOptimotxt" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                          <Component id="resultadoOrden" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="resultadoFaltanteConEspera" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="resultadoCostoTotal" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="resultadoInventario" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="botonGrafico" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -114,7 +121,7 @@
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="UnidadesInicialestxt" pref="46" max="32767" attributes="0"/>
+                                          <Component id="UnidadesInicialestxt" max="32767" attributes="0"/>
                                           <Component id="tiempoSimulaciontxt" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
@@ -178,18 +185,18 @@
               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="237" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-              <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+              <Component id="botonOptimizacion" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
               <Component id="resultadoOrden" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="resultadoInventario" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="ordenOptimotxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="ordenOptimotxt" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="resultadoFaltanteConEspera" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="reordenOptimotxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="reordenOptimotxt" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="resultadoFaltanteSinEspera" min="-2" max="-2" attributes="0"/>
@@ -199,7 +206,10 @@
                   <Component id="resultadoCostoTotal" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="23" max="32767" attributes="0"/>
-              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="botonGrafico" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -401,18 +411,26 @@
         <Property name="text" type="java.lang.String" value="Costo Optimo:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton3">
+    <Component class="javax.swing.JButton" name="botonOptimizacion">
       <Properties>
         <Property name="text" type="java.lang.String" value="Optimizacion"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonOptimizacionActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="resultadoFaltanteSinEspera">
       <Properties>
         <Property name="text" type="java.lang.String" value="Costo de Faltante sin Espera:"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="botonGrafico">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ver Grafico"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonGraficoActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

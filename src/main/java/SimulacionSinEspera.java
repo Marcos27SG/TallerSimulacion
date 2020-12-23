@@ -27,8 +27,10 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
          
         initComponents();
          this.setLocationRelativeTo(null);
+         botonOptimizacion.setEnabled(false);
+         botonGrafico.setEnabled(false);
     }
-
+        
     public static int costoInventario ; 
     public static int costoOrden ; 
     public static int costoFaltante ; 
@@ -85,11 +87,11 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
         resultadoFaltante = new javax.swing.JLabel();
         resultadoTotal = new javax.swing.JLabel();
         esteEsResultadoOrdenar = new javax.swing.JLabel();
-        Optimizacion = new javax.swing.JButton();
+        botonOptimizacion = new javax.swing.JButton();
         ordenOptimotxt = new javax.swing.JLabel();
         reordenOptimotxt = new javax.swing.JLabel();
         costoOptimotxt = new javax.swing.JLabel();
-        verGrafico = new javax.swing.JButton();
+        botonGrafico = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -150,10 +152,10 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
 
         resultadoTotal.setText("Costo Total:");
 
-        Optimizacion.setText("Optimizacion");
-        Optimizacion.addActionListener(new java.awt.event.ActionListener() {
+        botonOptimizacion.setText("Optimizacion");
+        botonOptimizacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OptimizacionActionPerformed(evt);
+                botonOptimizacionActionPerformed(evt);
             }
         });
 
@@ -163,10 +165,10 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
 
         costoOptimotxt.setText("Costo Optimo: ");
 
-        verGrafico.setText("Ver Grafico");
-        verGrafico.addActionListener(new java.awt.event.ActionListener() {
+        botonGrafico.setText("Ver Grafico");
+        botonGrafico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                verGraficoActionPerformed(evt);
+                botonGraficoActionPerformed(evt);
             }
         });
 
@@ -192,7 +194,7 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(esteEsResultadoOrdenar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Optimizacion))
+                                .addComponent(botonOptimizacion))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(resultadoInventario)
@@ -245,7 +247,7 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addComponent(Atras)
                                 .addGap(40, 40, 40)
-                                .addComponent(verGrafico)))
+                                .addComponent(botonGrafico)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -281,7 +283,7 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(resultadoOrden)
                     .addComponent(esteEsResultadoOrdenar)
-                    .addComponent(Optimizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(botonOptimizacion, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -300,7 +302,7 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Atras)
-                    .addComponent(verGrafico))
+                    .addComponent(botonGrafico))
                 .addContainerGap())
         );
 
@@ -332,7 +334,8 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
        resultadoTotal.setText("Costo Total: " + simulacion.costoTotal);
         //new ReporteSinEspera().setVisible(true);
        // this.setVisible(false);
-        
+        botonOptimizacion.setEnabled(true);
+         botonGrafico.setEnabled(true);
     }//GEN-LAST:event_IniciarSimulacionActionPerformed
    
     public void mostrar(){
@@ -465,7 +468,7 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_AtrasActionPerformed
 
-    private void OptimizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OptimizacionActionPerformed
+    private void botonOptimizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonOptimizacionActionPerformed
         SimulacionSinEspera simu = new SimulacionSinEspera (); 
         OptimizacionHooke optimizacion = new OptimizacionHooke();
 
@@ -509,13 +512,13 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
 
         
         
-    }//GEN-LAST:event_OptimizacionActionPerformed
+    }//GEN-LAST:event_botonOptimizacionActionPerformed
 
-    private void verGraficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verGraficoActionPerformed
+    private void botonGraficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGraficoActionPerformed
      
        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (int i = 0 ; i < lista.size() ; i++){
-            dataset.setValue(new Double(lista.get(i).getInventarioInicial()), "Values", "Mes" + i);
+            dataset.setValue(new Double(lista.get(i).getInventarioInicial()), "Values", "Mes" + (i+1));
         }
        
         JFreeChart chart = ChartFactory.createLineChart("INVENTARIO SIN ESPERA", "Mes", "Unidades", dataset, PlotOrientation.VERTICAL, false, true, true);
@@ -527,7 +530,7 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
           
         frame.setVisible(true);
         frame.setSize (774,645);
-    }//GEN-LAST:event_verGraficoActionPerformed
+    }//GEN-LAST:event_botonGraficoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -645,11 +648,12 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
     private javax.swing.JTextField CostoOrdentxt;
     private javax.swing.JButton IniciarSimulacion;
     private javax.swing.JTextField Mesestxt;
-    private javax.swing.JButton Optimizacion;
     private javax.swing.JTextField Ordentxt;
     private javax.swing.JTextField Reordentxt;
     private javax.swing.JTable Tabla;
     private javax.swing.JTextField UnidadesInicialestxt;
+    private javax.swing.JButton botonGrafico;
+    private javax.swing.JButton botonOptimizacion;
     private javax.swing.JLabel costoOptimotxt;
     private javax.swing.JLabel esteEsResultadoOrdenar;
     private javax.swing.JLabel jLabel1;
@@ -667,6 +671,5 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
     private javax.swing.JLabel resultadoInventario;
     private javax.swing.JLabel resultadoOrden;
     private javax.swing.JLabel resultadoTotal;
-    private javax.swing.JButton verGrafico;
     // End of variables declaration//GEN-END:variables
 }

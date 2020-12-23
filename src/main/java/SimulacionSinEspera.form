@@ -43,7 +43,7 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="esteEsResultadoOrdenar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="Optimizacion" min="-2" max="-2" attributes="0"/>
+                              <Component id="botonOptimizacion" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -113,7 +113,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="Atras" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                              <Component id="verGrafico" min="-2" max="-2" attributes="0"/>
+                              <Component id="botonGrafico" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -158,7 +158,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="resultadoOrden" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="esteEsResultadoOrdenar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="Optimizacion" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="botonOptimizacion" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
@@ -182,7 +182,7 @@
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="Atras" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="verGrafico" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="botonGrafico" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -345,12 +345,12 @@
     </Component>
     <Component class="javax.swing.JLabel" name="esteEsResultadoOrdenar">
     </Component>
-    <Component class="javax.swing.JButton" name="Optimizacion">
+    <Component class="javax.swing.JButton" name="botonOptimizacion">
       <Properties>
         <Property name="text" type="java.lang.String" value="Optimizacion"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="OptimizacionActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonOptimizacionActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="ordenOptimotxt">
@@ -368,12 +368,12 @@
         <Property name="text" type="java.lang.String" value="Costo Optimo: "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="verGrafico">
+    <Component class="javax.swing.JButton" name="botonGrafico">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ver Grafico"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="verGraficoActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonGraficoActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
