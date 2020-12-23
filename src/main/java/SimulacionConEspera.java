@@ -458,10 +458,13 @@ public class SimulacionConEspera extends javax.swing.JFrame {
 
          DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (int i = 0 ; i < lista.size() ; i++){
-            dataset.setValue(new Double(lista.get(i).getInventarioInicial()), "Values", "Mes" + (i+1));
+            dataset.setValue(new Double(lista.get(i).getInventarioInicial()), "Unidades", "Mes" + (i+1));
         }
-       
-        JFreeChart chart = ChartFactory.createLineChart("INVENTARIO CON ESPERA", "Mes", "Unidades", dataset, PlotOrientation.VERTICAL, false, true, true);
+        
+         for (int i = 0 ; i < lista.size() ; i++){
+            dataset.setValue(new Double(reorden), "Reorden", "Mes" + (i+1));
+        }
+        JFreeChart chart = ChartFactory.createLineChart("INVENTARIO CON ESPERA", "Mes", "Unidades", dataset , PlotOrientation.VERTICAL, false, true, true);
 //        BarRenderer renderer = null ; 
 //        CategoryPlot plot = null ; 
 //        renderer = new BarRenderer();
