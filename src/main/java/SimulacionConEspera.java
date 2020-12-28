@@ -93,6 +93,8 @@ public class SimulacionConEspera extends javax.swing.JFrame {
         botonOptimizacion = new javax.swing.JButton();
         resultadoFaltanteSinEspera = new javax.swing.JLabel();
         botonGrafico = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        interpretacion = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -201,44 +203,36 @@ public class SimulacionConEspera extends javax.swing.JFrame {
             }
         });
 
+        interpretacion.setColumns(20);
+        interpretacion.setLineWrap(true);
+        interpretacion.setRows(5);
+        jScrollPane2.setViewportView(interpretacion);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(resultadoFaltanteSinEspera)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(ordenOptimotxt)
-                                .addGap(199, 199, 199))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(botonOptimizacion)
-                                .addGap(83, 83, 83))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(reordenOptimotxt)
-                                    .addComponent(costoOptimotxt))
-                                .addContainerGap())))
+                            .addComponent(resultadoOrden)
+                            .addComponent(resultadoFaltanteConEspera)
+                            .addComponent(resultadoInventario)
+                            .addComponent(resultadoFaltanteSinEspera)
+                            .addComponent(resultadoCostoTotal)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton2)
-                            .addComponent(resultadoOrden, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(resultadoFaltanteConEspera, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(resultadoCostoTotal, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(resultadoInventario, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(18, 18, 18)
+                        .addGap(90, 90, 90)
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(botonGrafico)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(botonOptimizacion)))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 857, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
@@ -284,7 +278,23 @@ public class SimulacionConEspera extends javax.swing.JFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(UnidadesInicialestxt)
                                             .addComponent(tiempoSimulaciontxt))
-                                        .addGap(71, 71, 71))))))))
+                                        .addGap(71, 71, 71))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(458, 458, 458)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(ordenOptimotxt)
+                                    .addComponent(costoOptimotxt)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(460, 460, 460)
+                                .addComponent(reordenOptimotxt)))
+                        .addGap(188, 315, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1))
+                        .addGap(71, 71, 71))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -326,28 +336,32 @@ public class SimulacionConEspera extends javax.swing.JFrame {
                             .addComponent(iniciarSimulacion))))
                 .addGap(39, 39, 39)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(botonOptimizacion)
-                .addGap(1, 1, 1)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(resultadoOrden)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(resultadoInventario, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(ordenOptimotxt))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(resultadoFaltanteConEspera)
-                    .addComponent(reordenOptimotxt))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(resultadoFaltanteSinEspera)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(costoOptimotxt)
-                    .addComponent(resultadoCostoTotal))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                    .addComponent(resultadoInventario)
+                    .addComponent(ordenOptimotxt))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(resultadoFaltanteConEspera)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(resultadoFaltanteSinEspera)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(reordenOptimotxt)
+                        .addGap(15, 15, 15)))
+                .addComponent(costoOptimotxt)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(resultadoCostoTotal)
+                .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(botonGrafico))
+                    .addComponent(botonGrafico)
+                    .addComponent(botonOptimizacion))
                 .addContainerGap())
         );
 
@@ -445,6 +459,8 @@ public class SimulacionConEspera extends javax.swing.JFrame {
        SimulacionConEspera simulacion = new SimulacionConEspera(); 
       simulacion.costoTotal(orden, reorden, meses, unidadesIniciales, costoFaltanteConEspera , costoFaltanteSinEspera, costoOrden, costoInventario) ;
        mostrar();
+       interpretacion.setText("");
+       interpretacion();
        resultadoOrden.setText("Costo de Ordenar: " + simulacion.ordenarResultado);
        resultadoInventario.setText("Costo de llevar Inventario: " + simulacion.InventarioResultado);
        resultadoFaltanteConEspera.setText("Costo de Faltante con Espera: " + simulacion.faltoConEsperaResultado);
@@ -475,6 +491,38 @@ public class SimulacionConEspera extends javax.swing.JFrame {
         frame.setSize (774,645);
            
     }//GEN-LAST:event_botonGraficoActionPerformed
+    
+    public void interpretacion(){
+     for (int i = 0 ; i < lista.size() ; i++){
+           interpretacion.append("######################" + "\n");  
+           interpretacion.append("MES NRO:" + lista.get(i).getMes()+ "\n");  
+           interpretacion.append("La cantidad de unidades en el inventario inicial es: " +   lista.get(i).getInventarioInicial() + " Unidades\n" );  
+           interpretacion.append("En este mes realizan un pedido de: " + lista.get(i).getDemanda() + " Unidades\n"  );  
+           interpretacion.append("La cantidad de unidades en el inventario final es: " +   lista.get(i).getInventarioFinal() + " Unidades\n");  
+          
+           interpretacion.append("Existe un total de: " + lista.get(i).getFaltante()+ " Unidades Faltantes\n");
+           
+          
+           if (lista.get(i).getEspera() == ""){
+           }else{
+               interpretacion.append("El cliente " + lista.get(i).getEspera()+ " Espera\n");
+           }
+           if (lista.get(i).getOrden() == ""){
+           }else{
+                 interpretacion.append("Este mes se realiza un pedido\n");
+           }
+           
+         
+            
+             
+           
+           // lista.get(i).getOrden()
+            
+            
+            
+        }
+    
+    }
     
     public void mostrar(){
         System.out.print(lista.size());
@@ -673,6 +721,7 @@ public class SimulacionConEspera extends javax.swing.JFrame {
     private javax.swing.JButton botonOptimizacion;
     private javax.swing.JLabel costoOptimotxt;
     private javax.swing.JButton iniciarSimulacion;
+    private javax.swing.JTextArea interpretacion;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -685,6 +734,7 @@ public class SimulacionConEspera extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel ordenOptimotxt;
     private javax.swing.JLabel reordenOptimotxt;
     private javax.swing.JLabel resultadoCostoTotal;
