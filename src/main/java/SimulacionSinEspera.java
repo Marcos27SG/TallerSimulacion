@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import java.util.ArrayList ; 
-import javafx.application.*;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+//import javafx.application.*;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -52,8 +53,37 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
        double optimizacionReorden = 0 ; 
     public static ArrayList<ObjetoReporteSinEspera> lista = new ArrayList<ObjetoReporteSinEspera>();
     
-    
-    
+    public void validarSinEspera(){
+        
+         String a = CostoInventariotxt.getText();
+         String b = CostoOrdentxt.getText();
+         String c = CostoFaltantetxt.getText();
+         String d = UnidadesInicialestxt.getText();
+         String e = Ordentxt.getText();
+         String f = Reordentxt.getText();
+         String g = Mesestxt.getText();
+         if("0".equals(a) || "0".equals(b) || "0".equals(c) || "0".equals(d) || "0".equals(e) || "0".equals(f) || "0".equals(g) ){
+            JOptionPane.showMessageDialog(null,"Inicie con 1 como valor minimo");   
+            if ("0".equals(a)){
+                CostoInventariotxt.setText(null);}
+            if("0".equals(b)){
+                CostoOrdentxt.setText(null); }
+            if("0".equals(c)){ 
+                CostoFaltantetxt.setText(null);}
+            if("0".equals(d)){
+                UnidadesInicialestxt.setText(null);}
+            if("0".equals(e)){
+                Ordentxt.setText(null);}
+            if("0".equals(f)){
+                Reordentxt.setText(null);}
+            if("0".equals(g)){
+                Mesestxt.setText(null);}
+        }
+         if("".equals(a) || "".equals(b) || "".equals(c) || "".equals(d) || "".equals(e) || "".equals(f) || "".equals(g) ){
+            JOptionPane.showMessageDialog(null,"Llene los campos vacios");   
+         }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -114,15 +144,69 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
         jLabel9.setText("Meses a Simular");
 
         IniciarSimulacion.setText("INICIAR SIMULACION");
+        IniciarSimulacion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                IniciarSimulacionMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                IniciarSimulacionMousePressed(evt);
+            }
+        });
         IniciarSimulacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 IniciarSimulacionActionPerformed(evt);
+            }
+        });
+        IniciarSimulacion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                IniciarSimulacionKeyPressed(evt);
+            }
+        });
+
+        CostoInventariotxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                CostoInventariotxtKeyTyped(evt);
+            }
+        });
+
+        CostoOrdentxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                CostoOrdentxtKeyTyped(evt);
+            }
+        });
+
+        CostoFaltantetxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                CostoFaltantetxtKeyTyped(evt);
             }
         });
 
         UnidadesInicialestxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UnidadesInicialestxtActionPerformed(evt);
+            }
+        });
+        UnidadesInicialestxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                UnidadesInicialestxtKeyTyped(evt);
+            }
+        });
+
+        Ordentxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                OrdentxtKeyTyped(evt);
+            }
+        });
+
+        Reordentxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                ReordentxtKeyTyped(evt);
+            }
+        });
+
+        Mesestxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                MesestxtKeyTyped(evt);
             }
         });
 
@@ -320,6 +404,7 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
     }//GEN-LAST:event_UnidadesInicialestxtActionPerformed
 
     private void IniciarSimulacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IniciarSimulacionActionPerformed
+        validarSinEspera();
         lista.clear();
          costoInventario = Integer.parseInt(CostoInventariotxt.getText());
          costoOrden = Integer.parseInt(CostoOrdentxt.getText());
@@ -569,6 +654,54 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
         frame.setVisible(true);
         frame.setSize (774,645);
     }//GEN-LAST:event_botonGraficoActionPerformed
+
+    private void CostoInventariotxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CostoInventariotxtKeyTyped
+        char c = evt.getKeyChar();  
+        if (c < '0' || c > '9') evt.consume();
+        
+    }//GEN-LAST:event_CostoInventariotxtKeyTyped
+
+    private void CostoOrdentxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CostoOrdentxtKeyTyped
+        char c = evt.getKeyChar();  
+        if (c < '0' || c > '9') evt.consume();
+    }//GEN-LAST:event_CostoOrdentxtKeyTyped
+
+    private void CostoFaltantetxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CostoFaltantetxtKeyTyped
+        char c = evt.getKeyChar();  
+        if (c < '0' || c > '9') evt.consume();
+    }//GEN-LAST:event_CostoFaltantetxtKeyTyped
+
+    private void UnidadesInicialestxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_UnidadesInicialestxtKeyTyped
+        char c = evt.getKeyChar();  
+        if (c < '0' || c > '9') evt.consume();
+    }//GEN-LAST:event_UnidadesInicialestxtKeyTyped
+
+    private void OrdentxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_OrdentxtKeyTyped
+        char c = evt.getKeyChar();  
+        if (c < '0' || c > '9') evt.consume();
+    }//GEN-LAST:event_OrdentxtKeyTyped
+
+    private void ReordentxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ReordentxtKeyTyped
+        char c = evt.getKeyChar();  
+        if (c < '0' || c > '9') evt.consume();
+    }//GEN-LAST:event_ReordentxtKeyTyped
+
+    private void MesestxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MesestxtKeyTyped
+        char c = evt.getKeyChar();  
+        if (c < '0' || c > '9') evt.consume();
+    }//GEN-LAST:event_MesestxtKeyTyped
+
+    private void IniciarSimulacionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IniciarSimulacionKeyPressed
+         
+    }//GEN-LAST:event_IniciarSimulacionKeyPressed
+
+    private void IniciarSimulacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IniciarSimulacionMouseClicked
+       // validar();
+    }//GEN-LAST:event_IniciarSimulacionMouseClicked
+
+    private void IniciarSimulacionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IniciarSimulacionMousePressed
+ 
+    }//GEN-LAST:event_IniciarSimulacionMousePressed
 
     /**
      * @param args the command line arguments

@@ -235,25 +235,47 @@
         <Property name="text" type="java.lang.String" value="INICIAR SIMULACION"/>
       </Properties>
       <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="IniciarSimulacionMouseClicked"/>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="IniciarSimulacionMousePressed"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="IniciarSimulacionActionPerformed"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="IniciarSimulacionKeyPressed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="CostoInventariotxt">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="CostoInventariotxtKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="CostoOrdentxt">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="CostoOrdentxtKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="CostoFaltantetxt">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="CostoFaltantetxtKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="UnidadesInicialestxt">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UnidadesInicialestxtActionPerformed"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="UnidadesInicialestxtKeyTyped"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="Ordentxt">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="OrdentxtKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="Reordentxt">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="ReordentxtKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="Mesestxt">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="MesestxtKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="Atras">
       <Properties>

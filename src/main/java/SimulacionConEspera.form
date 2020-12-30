@@ -230,16 +230,24 @@
     <Component class="javax.swing.JTextField" name="CostoInventariotxt">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CostoInventariotxtActionPerformed"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="CostoInventariotxtKeyTyped"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="CostoOrdentxt">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CostoOrdentxtActionPerformed"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="CostoOrdentxtKeyTyped"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="CostoFaltanteConEsperatxt">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="CostoFaltanteConEsperatxtKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="UnidadesInicialestxt">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="UnidadesInicialestxtKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
@@ -284,13 +292,18 @@
     <Component class="javax.swing.JTextField" name="Ordentxt">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="OrdentxtActionPerformed"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="OrdentxtKeyTyped"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="Reordentxt">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="ReordentxtKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="tiempoSimulaciontxt">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tiempoSimulaciontxtActionPerformed"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tiempoSimulaciontxtKeyTyped"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="iniciarSimulacion">
@@ -309,6 +322,7 @@
     <Component class="javax.swing.JTextField" name="CostoFaltanteSinEsperatxt">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CostoFaltanteSinEsperatxtActionPerformed"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="CostoFaltanteSinEsperatxtKeyTyped"/>
       </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">

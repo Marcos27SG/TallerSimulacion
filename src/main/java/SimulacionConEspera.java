@@ -1,6 +1,7 @@
 
 //import static SimulacionSinEspera.lista;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
@@ -51,7 +52,40 @@ public class SimulacionConEspera extends javax.swing.JFrame {
       double optimizacionOrden = 0 ; 
        double optimizacionReorden = 0 ; 
     public static ArrayList<ModeloReporteConEspera> lista = new ArrayList<ModeloReporteConEspera>();
-
+    
+    public void validarConEspera(){
+        
+         String a = CostoInventariotxt.getText();
+         String b = CostoOrdentxt.getText();
+         String c = CostoFaltanteConEsperatxt.getText();
+         String d = CostoFaltanteSinEsperatxt.getText();
+         String e = Ordentxt.getText();
+         String f = Reordentxt.getText();
+         String g = tiempoSimulaciontxt.getText();
+         String h = UnidadesInicialestxt.getText();
+         if("0".equals(a) || "0".equals(b) || "0".equals(c) || "0".equals(d) || "0".equals(e) || "0".equals(f) || "0".equals(g) || "0".equals(h)){
+            JOptionPane.showMessageDialog(null,"Inicie con 1 como valor minimo");   
+            if ("0".equals(a)){
+                CostoInventariotxt.setText(null);}
+            if("0".equals(b)){
+                CostoOrdentxt.setText(null); }
+            if("0".equals(c)){ 
+                CostoFaltanteConEsperatxt.setText(null);}
+            if("0".equals(d)){
+                CostoFaltanteSinEsperatxt.setText(null);}
+            if("0".equals(e)){
+                Ordentxt.setText(null);}
+            if("0".equals(f)){
+                Reordentxt.setText(null);}
+            if("0".equals(g)){
+                tiempoSimulaciontxt.setText(null);}
+            if("0".equals(h)){
+                UnidadesInicialestxt.setText(null);}
+        }
+         if("".equals(a) || "".equals(b) || "".equals(c) || "".equals(d) || "".equals(e) || "".equals(f) || "".equals(g) || "0".equals(h)){
+            JOptionPane.showMessageDialog(null,"Llene los campos vacios");   
+         }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -103,10 +137,32 @@ public class SimulacionConEspera extends javax.swing.JFrame {
                 CostoInventariotxtActionPerformed(evt);
             }
         });
+        CostoInventariotxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                CostoInventariotxtKeyTyped(evt);
+            }
+        });
 
         CostoOrdentxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CostoOrdentxtActionPerformed(evt);
+            }
+        });
+        CostoOrdentxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                CostoOrdentxtKeyTyped(evt);
+            }
+        });
+
+        CostoFaltanteConEsperatxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                CostoFaltanteConEsperatxtKeyTyped(evt);
+            }
+        });
+
+        UnidadesInicialestxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                UnidadesInicialestxtKeyTyped(evt);
             }
         });
 
@@ -131,10 +187,26 @@ public class SimulacionConEspera extends javax.swing.JFrame {
                 OrdentxtActionPerformed(evt);
             }
         });
+        Ordentxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                OrdentxtKeyTyped(evt);
+            }
+        });
+
+        Reordentxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                ReordentxtKeyTyped(evt);
+            }
+        });
 
         tiempoSimulaciontxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tiempoSimulaciontxtActionPerformed(evt);
+            }
+        });
+        tiempoSimulaciontxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tiempoSimulaciontxtKeyTyped(evt);
             }
         });
 
@@ -150,6 +222,11 @@ public class SimulacionConEspera extends javax.swing.JFrame {
         CostoFaltanteSinEsperatxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CostoFaltanteSinEsperatxtActionPerformed(evt);
+            }
+        });
+        CostoFaltanteSinEsperatxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                CostoFaltanteSinEsperatxtKeyTyped(evt);
             }
         });
 
@@ -443,7 +520,7 @@ public class SimulacionConEspera extends javax.swing.JFrame {
 
     private void iniciarSimulacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarSimulacionActionPerformed
         // TODO add your handling code here:
-        
+        validarConEspera();
            lista.clear();
          costoInventario = Integer.parseInt(CostoInventariotxt.getText());
          costoOrden = Integer.parseInt(CostoOrdentxt.getText());
@@ -491,6 +568,46 @@ public class SimulacionConEspera extends javax.swing.JFrame {
         frame.setSize (774,645);
            
     }//GEN-LAST:event_botonGraficoActionPerformed
+
+    private void CostoInventariotxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CostoInventariotxtKeyTyped
+        char c = evt.getKeyChar();  
+        if (c < '0' || c > '9') evt.consume();
+    }//GEN-LAST:event_CostoInventariotxtKeyTyped
+
+    private void CostoOrdentxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CostoOrdentxtKeyTyped
+        char c = evt.getKeyChar();  
+        if (c < '0' || c > '9') evt.consume();
+    }//GEN-LAST:event_CostoOrdentxtKeyTyped
+
+    private void CostoFaltanteConEsperatxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CostoFaltanteConEsperatxtKeyTyped
+        char c = evt.getKeyChar();  
+        if (c < '0' || c > '9') evt.consume();
+    }//GEN-LAST:event_CostoFaltanteConEsperatxtKeyTyped
+
+    private void CostoFaltanteSinEsperatxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CostoFaltanteSinEsperatxtKeyTyped
+        char c = evt.getKeyChar();  
+        if (c < '0' || c > '9') evt.consume();
+    }//GEN-LAST:event_CostoFaltanteSinEsperatxtKeyTyped
+
+    private void OrdentxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_OrdentxtKeyTyped
+        char c = evt.getKeyChar();  
+        if (c < '0' || c > '9') evt.consume();
+    }//GEN-LAST:event_OrdentxtKeyTyped
+
+    private void ReordentxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ReordentxtKeyTyped
+        char c = evt.getKeyChar();  
+        if (c < '0' || c > '9') evt.consume();
+    }//GEN-LAST:event_ReordentxtKeyTyped
+
+    private void tiempoSimulaciontxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tiempoSimulaciontxtKeyTyped
+        char c = evt.getKeyChar();  
+        if (c < '0' || c > '9') evt.consume();
+    }//GEN-LAST:event_tiempoSimulaciontxtKeyTyped
+
+    private void UnidadesInicialestxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_UnidadesInicialestxtKeyTyped
+        char c = evt.getKeyChar();  
+        if (c < '0' || c > '9') evt.consume();
+    }//GEN-LAST:event_UnidadesInicialestxtKeyTyped
     
     public void interpretacion(){
      for (int i = 0 ; i < lista.size() ; i++){
