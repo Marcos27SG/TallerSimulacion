@@ -3,8 +3,42 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+import com.lowagie.text.pdf.PdfDocument;
+import com.lowagie.text.pdf.PdfGraphics2D;
+import java.awt.BorderLayout;
+import java.awt.Graphics;
+import java.awt.PrintJob;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.OutputStream;
+import java.lang.annotation.ElementType;
+import java.security.Policy;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import static javax.swing.UIManager.put;
+import javax.swing.WindowConstants;
+import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.report.builder.DynamicReports;
+import static net.sf.dynamicreports.report.builder.DynamicReports.report;
+import net.sf.dynamicreports.report.builder.style.StyleBuilder;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 //import javafx.application.*;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -14,6 +48,9 @@ import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.ApplicationFrame;
 import org.jfree.chart.ChartFrame;
+import org.jfree.ui.HorizontalAlignment;
+import sun.jvm.hotspot.debugger.Page;
+import static sun.jvm.hotspot.oops.CellTypeState.top;
 
 /**
  *
@@ -31,7 +68,9 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
          botonOptimizacion.setEnabled(false);
          botonGrafico.setEnabled(false);
     }
-        
+    
+    
+    private static JasperReport report;
     public static int costoInventario ; 
     public static int costoOrden ; 
     public static int costoFaltante ; 
@@ -124,6 +163,7 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
         botonGrafico = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         interpretacion = new javax.swing.JTextArea();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -262,6 +302,13 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
         interpretacion.setRows(5);
         jScrollPane2.setViewportView(interpretacion);
 
+        jButton1.setText("PDF");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -281,65 +328,70 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(30, 30, 30)
+                                .addComponent(CostoFaltantetxt, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(CostoOrdentxt, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addGap(29, 29, 29)
+                                    .addComponent(CostoInventariotxt, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(75, 75, 75)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))
+                        .addGap(48, 48, 48)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Reordentxt, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(Ordentxt, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(IniciarSimulacion))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(UnidadesInicialestxt, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(38, 38, 38)
+                                    .addComponent(jLabel9)
+                                    .addGap(42, 42, 42)
+                                    .addComponent(Mesestxt, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(Atras)
+                        .addGap(40, 40, 40)
+                        .addComponent(botonGrafico)
+                        .addGap(18, 18, 18)
+                        .addComponent(botonOptimizacion))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(27, 27, 27)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(resultadoInventario)
                                     .addComponent(resultadoFaltante)
                                     .addComponent(resultadoTotal)
-                                    .addComponent(resultadoOrden)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(52, 52, 52)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addGap(30, 30, 30)
-                                        .addComponent(CostoFaltantetxt, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel3)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(CostoOrdentxt, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel2)
-                                            .addGap(29, 29, 29)
-                                            .addComponent(CostoInventariotxt, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(75, 75, 75)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel8))
-                                .addGap(48, 48, 48)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Reordentxt, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(Ordentxt, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(IniciarSimulacion))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addComponent(UnidadesInicialestxt, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(38, 38, 38)
-                                            .addComponent(jLabel9)
-                                            .addGap(42, 42, 42)
-                                            .addComponent(Mesestxt, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(resultadoOrden))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 608, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(Atras)
-                                .addGap(40, 40, 40)
-                                .addComponent(botonGrafico)
-                                .addGap(18, 18, 18)
-                                .addComponent(botonOptimizacion))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(180, 180, 180)
-                                .addComponent(esteEsResultadoOrdenar)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane2)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 754, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(esteEsResultadoOrdenar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addGap(0, 27, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -369,12 +421,15 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
                     .addComponent(Reordentxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(94, 94, 94)
+                        .addComponent(esteEsResultadoOrdenar))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(esteEsResultadoOrdenar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(resultadoOrden)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -703,6 +758,65 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
  
     }//GEN-LAST:event_IniciarSimulacionMousePressed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       //String master = System.getProperty("user.dir")+"//src//main//java//Reportes//newReport.jasper";
+            
+      llamaalpdf pdf = new llamaalpdf();
+      pdf.crear_PDF("a", "b", "c", "d", interpretacion.getText());
+              
+        
+        /*
+       //imprime text AREA
+       Properties defaultProps = new Properties();
+
+        PrintJob print=Toolkit.getDefaultToolkit().getPrintJob(this,"Imprimir",defaultProps);       
+        Graphics g=print.getGraphics();
+
+        if(g!=null)
+        {
+            
+                interpretacion.printAll(g); // AreaPrograma es JTextArea
+        }
+        g.dispose();
+        print.end();
+            
+       DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+            for (int i = 0 ; i < lista.size() ; i++){
+                dataset.setValue(new Double(lista.get(i).getInventarioInicial()), "Unidades", "Mes" + (i+1));
+            }
+               for (int i = 0 ; i < lista.size() ; i++){
+                dataset.setValue(new Double(reorden), "Reorden", "Mes" + (i+1));
+            }
+
+            JFreeChart chart = ChartFactory.createLineChart("INVENTARIO SIN ESPERA", "Mes", "Unidades", dataset, PlotOrientation.VERTICAL, false, true, true);
+    //        BarRenderer renderer = null ; 
+    //        CategoryPlot plot = null ; 
+    //        renderer = new BarRenderer();
+            BufferedImage image = chart.createBufferedImage( 400, 300);
+     
+            
+        try {       
+            
+            
+             HashMap parametros = new HashMap();
+            parametros.put("Joda",interpretacion);
+            
+            JasperPrint informe = JasperFillManager.fillReport(master, parametros,new JREmptyDataSource());
+            JasperViewer.viewReport(informe,false);
+        } catch (Exception e) {
+        }*/
+            /*frame = new JFrame();
+            frame.setTitle("stained_image");
+            frame.setSize(image.getWidth(), image.getHeight());
+            frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            label=new JLabel();
+            label.setIcon(new ImageIcon(image));
+            frame.getContentPane().add(label,BorderLayout.CENTER);
+            frame.setLocationRelativeTo(null);
+            frame.pack();
+            frame.setVisible(true);*/
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -828,6 +942,7 @@ public class SimulacionSinEspera extends javax.swing.JFrame {
     private javax.swing.JLabel costoOptimotxt;
     private javax.swing.JLabel esteEsResultadoOrdenar;
     private javax.swing.JTextArea interpretacion;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
